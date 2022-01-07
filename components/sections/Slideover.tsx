@@ -28,7 +28,7 @@ export default function Slideover({ open, setOpen }) {
                   <div className="px-4 sm:px-6">
                     <div className="flex items-start justify-between">
                       <Dialog.Title className="text-lg font-medium text-gray-900">
-                        Panel title
+                        Settings
                       </Dialog.Title>
                       <div className="ml-3 h-7 flex items-center">
                         <button
