@@ -11,9 +11,7 @@ export default function Prettier() {
   const runPrettier = useCallback(() => {
     if (activeCode.code) {
       try {
-        /**
-         * I would recomend to run this process in a Worker
-         */
+        // try refactoring this process to run in a Worker
         const formattedCode = prettier.format(activeCode.code, {
           parser: 'babel',
           plugins: [parserBabel],

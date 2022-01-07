@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "scratchbox",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/hasibhassan/Dev/scratchbox/amplify/backend/api/scratchbox/schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 7
+    },
+    "conflictResolution": {
+      "defaultResolutionStrategy": {
+        "type": "AUTOMERGE"
+      }
+    }
+  }
+}
