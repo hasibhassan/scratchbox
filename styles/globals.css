@@ -18,6 +18,10 @@
   cursor: col-resize;
 }
 
+.sp-cube-wrapper {
+  display: none;
+}
+
 /* div.SplitPane.vertical {
   height: 80%;
 }

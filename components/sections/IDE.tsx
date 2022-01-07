@@ -6,11 +6,14 @@ import {
 import '@codesandbox/sandpack-react/dist/index.css'
 import Editor from '@ui/Editor'
 import Preview from '@ui/Preview'
+import reactTSCustomSetup from '@utils/reactTSCustomSetup'
+import Prettier from '@ui/Prettier'
 
 export default function IDE() {
   return (
-    <SandpackProvider>
+    <SandpackProvider template="react-ts" customSetup={reactTSCustomSetup}>
       <SandpackThemeProvider theme={'github-light'}>
+        <Prettier />
         <Split className="split" minSize={200}>
           <Editor />
           <Preview />
