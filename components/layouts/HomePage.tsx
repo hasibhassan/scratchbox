@@ -11,11 +11,7 @@ export default function HomePage() {
     { name: 'Settings', href: '#', onClick: () => setOpen(!open) },
     { name: 'Sign out', href: '#' },
   ]
-  const navigation = [
-    // { name: 'Dashboard', href: '#', current: true },
-    // { name: 'Projects', href: '#', current: false },
-    // { name: 'Settings', href: '#', current: false },
-  ]
+  const navigation = []
   const user = {
     name: 'User',
     email: 'user@user.com',

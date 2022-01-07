@@ -1,5 +1,4 @@
-/* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 
@@ -44,14 +43,14 @@ export default function Slideover({ open, setOpen }) {
                     </div>
                   </div>
                   <div className="mt-6 relative flex-1 px-4 sm:px-6">
-                    {/* Replace with your content */}
+                    {/* content */}
                     <div className="absolute inset-0 px-4 sm:px-6">
                       <div
                         className="h-full border-2 border-dashed border-gray-200"
                         aria-hidden="true"
                       />
                     </div>
-                    {/* /End replace */}
+                    {/* /End */}
                   </div>
                 </div>
               </div>
