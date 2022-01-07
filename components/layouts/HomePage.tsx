@@ -1,31 +1,31 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
+import classNames from '@utils/classNames'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import IDE from '@sections/IDE'
-
-const user = {
-  name: 'User',
-  email: 'user@user.com',
-  imageUrl:
-    'https://avatars.dicebear.com/api/male/john.svg?background=%230000ff',
-}
-const navigation = [
-  // { name: 'Dashboard', href: '#', current: true },
-  // { name: 'Projects', href: '#', current: false },
-  // { name: 'Settings', href: '#', current: false },
-]
-const userNavigation = [
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
-]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+import Slideover from '@sections/Slideover'
 
 export default function HomePage() {
+  const [open, setOpen] = useState(false)
+  const userNavigation = [
+    { name: 'Settings', href: '#', onClick: () => setOpen(!open) },
+    { name: 'Sign out', href: '#' },
+  ]
+  const navigation = [
+    // { name: 'Dashboard', href: '#', current: true },
+    // { name: 'Projects', href: '#', current: false },
+    // { name: 'Settings', href: '#', current: false },
+  ]
+  const user = {
+    name: 'User',
+    email: 'user@user.com',
+    imageUrl:
+      'https://avatars.dicebear.com/api/male/john.svg?background=%230000ff',
+  }
+
   return (
     <>
+      <Slideover open={open} setOpen={setOpen} />
       {/*
         update by using:
 
@@ -93,6 +93,9 @@ export default function HomePage() {
                                 {({ active }) => (
                                   <a
                                     href={item.href}
+                                    onClick={
+                                      item.onClick ? item.onClick : undefined
+                                    }
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700'
