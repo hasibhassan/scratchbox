@@ -1,10 +1,15 @@
 import { SandpackSetup } from '@codesandbox/sandpack-react'
 
 const mainFile = `export const App = () => {
-    return <button onClick={() => alert('Hello World!')}>Alert</button>
+  return (
+    <div>
+      <h2>Click me</h2>
+      <button onClick={() => alert('Hello World!')}>Alert</button>
+    </div>
+  )
 }`
 
-const styleSheet = `h1 {
+const styleSheet = `h2 {
   color: blue;
 }`
 
