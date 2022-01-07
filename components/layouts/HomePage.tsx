@@ -10,11 +10,14 @@ const user = {
     'https://avatars.dicebear.com/api/male/john.svg?background=%230000ff',
 }
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Settings', href: '#', current: false },
+  // { name: 'Dashboard', href: '#', current: true },
+  // { name: 'Projects', href: '#', current: false },
+  // { name: 'Settings', href: '#', current: false },
 ]
-const userNavigation = [{ name: 'Sign out', href: '#' }]
+const userNavigation = [
+  { name: 'Settings', href: '#' },
+  { name: 'Sign out', href: '#' },
+]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')

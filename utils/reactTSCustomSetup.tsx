@@ -4,6 +4,10 @@ const mainFile = `export const App = () => {
     return <button onClick={() => alert('Hello World!')}>Alert</button>
 }`
 
+const styleSheet = `h1 {
+  color: blue;
+}`
+
 const reactTSCustomSetup: SandpackSetup = {
   entry: '/src/index.tsx',
   main: '/src/App.tsx',
@@ -39,11 +43,11 @@ const reactTSCustomSetup: SandpackSetup = {
   </html>`,
       hidden: true,
     },
-
     '/src/index.tsx': {
       code: `import * as React from "react";
   import { render } from "react-dom";
   import { App } from "./App";
+  import './App.css';
   const rootElement = document.getElementById("root");
   render(<App/>, rootElement);
           `,
@@ -51,6 +55,9 @@ const reactTSCustomSetup: SandpackSetup = {
     },
     '/src/App.tsx': {
       code: mainFile,
+    },
+    '/src/App.css': {
+      code: styleSheet,
     },
   },
 }
