@@ -1,4 +1,4 @@
-import { Authenticator } from '@aws-amplify/ui-react'
+import Authenticator from '@sections/Authenticator'
 import HomePage from '@layouts/HomePage'
 import Logo from '@ui/Logo'
 import '@aws-amplify/ui-react/styles.css'
@@ -31,12 +31,8 @@ export default function AuthPage() {
         </div>
 
         <main>
-          <div className="pt-36">
-            <Authenticator>
-              {({ signOut, user }) => (
-                <HomePage signOut={signOut} user={user} />
-              )}
-            </Authenticator>
+          <div className="">
+            <Authenticator />
           </div>
         </main>
       </div>
