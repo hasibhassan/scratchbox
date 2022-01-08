@@ -4,20 +4,16 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import IDE from '@sections/IDE'
 import Slideover from '@sections/Slideover'
+import Logo from '@ui/Logo'
+import Avatar from 'react-avatar'
 
-export default function HomePage() {
+export default function HomePage({ signOut, user }) {
   const [open, setOpen] = useState(false)
   const userNavigation = [
-    { name: 'Settings', href: '#', onClick: () => setOpen(!open) },
-    { name: 'Sign out', href: '#' },
+    { name: 'Settings', onClick: () => setOpen(!open) },
+    { name: 'Sign Out', onClick: () => signOut() },
   ]
   const navigation = []
-  const user = {
-    name: 'User',
-    email: 'user@user.com',
-    imageUrl:
-      'https://avatars.dicebear.com/api/male/john.svg?background=%230000ff',
-  }
 
   return (
     <>
@@ -38,7 +34,7 @@ export default function HomePage() {
                 <div className="flex items-center justify-between h-5v">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <img className="h-8 w-8" src="" alt="Scratchbox" />
+                      <Logo />
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
@@ -67,11 +63,13 @@ export default function HomePage() {
                         <div>
                           <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                             <span className="sr-only">Open user menu</span>
-                            <img
-                              className="h-8 w-8 rounded-full"
-                              src={user.imageUrl}
-                              alt=""
-                            />
+                            <div className="h-8 w-8 rounded-full">
+                              <Avatar
+                                email={user.email}
+                                round={true}
+                                maxInitials={1}
+                              />
+                            </div>
                           </Menu.Button>
                         </div>
                         <Transition
@@ -88,10 +86,7 @@ export default function HomePage() {
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
                                   <a
-                                    href={item.href}
-                                    onClick={
-                                      item.onClick ? item.onClick : undefined
-                                    }
+                                    onClick={item.onClick}
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700'
@@ -146,16 +141,18 @@ export default function HomePage() {
                 <div className="pt-4 pb-3 border-t border-gray-700">
                   <div className="flex items-center px-5">
                     <div className="flex-shrink-0">
-                      <img
-                        className="h-10 w-10 rounded-full"
-                        src={user.imageUrl}
-                        alt=""
-                      />
+                      <div className="h-10 w-10 rounded-full">
+                        <Avatar
+                          email={user.email}
+                          round={true}
+                          maxInitials={1}
+                        />
+                      </div>
                     </div>
                     <div className="ml-3">
-                      <div className="text-base font-medium text-white">
+                      {/* <div className="text-base font-medium text-white">
                         {user.name}
-                      </div>
+                      </div> */}
                       <div className="text-sm font-medium text-gray-400">
                         {user.email}
                       </div>
@@ -166,7 +163,7 @@ export default function HomePage() {
                       <Disclosure.Button
                         key={item.name}
                         as="a"
-                        href={item.href}
+                        onClick={item.onClick}
                         className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
                       >
                         {item.name}
