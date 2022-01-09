@@ -1,17 +1,5 @@
 import { SandpackSetup } from '@codesandbox/sandpack-react'
-
-const mainFile = `export const App = () => {
-  return (
-    <div>
-      <h2>Click me</h2>
-      <button onClick={() => alert('Hello World!')}>Alert</button>
-    </div>
-  )
-}`
-
-const styleSheet = `h2 {
-  color: blue;
-}`
+import defaultCode from '@utils/defaultCode'
 
 const reactTSCustomSetup: SandpackSetup = {
   entry: '/src/index.tsx',
@@ -52,17 +40,13 @@ const reactTSCustomSetup: SandpackSetup = {
       code: `import * as React from "react";
   import { render } from "react-dom";
   import { App } from "./App";
-  import './App.css';
   const rootElement = document.getElementById("root");
   render(<App/>, rootElement);
           `,
       hidden: true,
     },
     '/src/App.tsx': {
-      code: mainFile,
-    },
-    '/src/App.css': {
-      code: styleSheet,
+      code: defaultCode,
     },
   },
 }
