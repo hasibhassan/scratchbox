@@ -5,7 +5,7 @@ export default function Preview() {
     <SandpackPreview
       customStyle={{ height: '95vh' }}
       showOpenInCodeSandbox={false}
-      showRefreshButton={false}
+      showRefreshButton
     />
   )
 }
