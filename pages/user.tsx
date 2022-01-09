@@ -6,7 +6,6 @@ import IDE from '@sections/IDE'
 import Slideover from '@sections/Slideover'
 import Logo from '@ui/Logo'
 import { withAuthenticator } from '@aws-amplify/ui-react'
-import '@aws-amplify/ui-react/styles.css'
 
 function HomePage({ signOut, user }) {
   const [open, setOpen] = useState(false)
@@ -183,4 +182,6 @@ function HomePage({ signOut, user }) {
   )
 }
 
-export default withAuthenticator(HomePage)
+export default withAuthenticator(HomePage, {
+  loginMechanisms: ['email'],
+})
