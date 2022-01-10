@@ -1,23 +1,40 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import classNames from '@utils/classNames'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import IDE from '@sections/IDE'
 import Slideover from '@sections/Slideover'
 import Logo from '@ui/Logo'
-import { withAuthenticator } from '@aws-amplify/ui-react'
+import { withAuthenticator, View, Image, useTheme } from '@aws-amplify/ui-react'
+import fetchCode from '@utils/fetchCode'
+import { useSandpack } from '@codesandbox/sandpack-react'
 
 function HomePage({ signOut, user }) {
-  const [open, setOpen] = useState(false)
+  const { sandpack } = useSandpack()
+  // const [open, setOpen] = useState(false)
   const userNavigation = [
-    { name: 'Settings', onClick: () => setOpen(!open) },
+    // { name: 'Settings', onClick: () => setOpen(!open) },
     { name: 'Sign Out', onClick: () => signOut() },
   ]
   const navigation = []
 
+  // useEffect(() => {
+  //   try {
+  //     console.log('running fetchCode in user.tsx')
+
+  //     let savedCode = fetchCode(user.username)
+  //     savedCode.then((data) => {
+  //       console.log('the result from fetchCode in user.tsx is: ', data)
+  //       if (savedCode != 'not found') {
+  //         sandpack.updateFile(sandpack.activePath, savedCode)
+  //       }
+  //     })
+  //   } catch {}
+  // }, [])
+
   return (
     <>
-      <Slideover open={open} setOpen={setOpen} />
+      {/* <Slideover open={open} setOpen={setOpen} /> */}
       {/*
         update by using:
 
@@ -184,4 +201,17 @@ function HomePage({ signOut, user }) {
 
 export default withAuthenticator(HomePage, {
   loginMechanisms: ['email'],
+  components: {
+    Header() {
+      const { tokens } = useTheme()
+
+      return (
+        <View textAlign="center" padding={tokens.space.large}>
+          <a href="/">
+            <Image alt="Scratchbox logo" src="logo-black.svg" />
+          </a>
+        </View>
+      )
+    },
+  },
 })
