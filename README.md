@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://main.d2u87gtuc012bu.amplifyapp.com/"><img src="../scratchbox/public/logo-black.svg" alt="Vision logo" width="100"></a>
+  <a href="https://main.d2u87gtuc012bu.amplifyapp.com/"><img src="./public/logo-black.svg" alt="Scratchbox logo" width="100"></a>
   <br>
   Scratchbox
   <br>
