@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Fragment, useEffect, useState } from 'react'
 import classNames from '@utils/classNames'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
