@@ -25,6 +25,7 @@ function HomePage({ signOut, user }) {
       console.log('saveeuser code in useeffect 1', savedUserCode)
       console.log('data in useeffect 1', data)
 
+      // @ts-ignore
       setSavedUserCode(data)
     })
   }, [])

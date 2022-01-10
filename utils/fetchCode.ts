@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { API, graphqlOperation } from 'aws-amplify'
 import * as queries from '@src/graphql/queries'
 
