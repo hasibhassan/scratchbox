@@ -11,6 +11,7 @@ import { useSandpack } from '@codesandbox/sandpack-react'
 
 function HomePage({ signOut, user }) {
   const { sandpack } = useSandpack()
+  const [savedUserCode, setSavedUserCode] = useState('')
   // const [open, setOpen] = useState(false)
   const userNavigation = [
     // { name: 'Settings', onClick: () => setOpen(!open) },
@@ -18,19 +19,23 @@ function HomePage({ signOut, user }) {
   ]
   const navigation = []
 
-  // useEffect(() => {
-  //   try {
-  //     console.log('running fetchCode in user.tsx')
+  useEffect(() => {
+    let savedCode = fetchCode(user.username)
+    savedCode.then((data) => {
+      console.log('saveeuser code in useeffect 1', savedUserCode)
+      console.log('data in useeffect 1', data)
 
-  //     let savedCode = fetchCode(user.username)
-  //     savedCode.then((data) => {
-  //       console.log('the result from fetchCode in user.tsx is: ', data)
-  //       if (savedCode != 'not found') {
-  //         sandpack.updateFile(sandpack.activePath, savedCode)
-  //       }
-  //     })
-  //   } catch {}
-  // }, [])
+      setSavedUserCode(data)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (savedUserCode && savedUserCode !== 'not found') {
+      console.log('savedusercode in useeffect2', savedUserCode)
+
+      sandpack.updateFile(sandpack.activePath, savedUserCode)
+    }
+  }, [savedUserCode])
 
   return (
     <>
