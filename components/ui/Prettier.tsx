@@ -2,6 +2,9 @@ import { useCallback, useEffect, useState } from 'react'
 import { useActiveCode, useSandpack } from '@codesandbox/sandpack-react'
 import prettier from 'prettier'
 import parserBabel from 'prettier/parser-babel'
+import { Auth } from 'aws-amplify'
+import updateCode from '@utils/updateCode'
+import defaultCode from '@utils/defaultCode'
 
 export default function Prettier() {
   const [prettierCode, setPrettierCode] = useState('')
@@ -10,22 +13,43 @@ export default function Prettier() {
 
   const runPrettier = useCallback(() => {
     if (activeCode.code) {
-      try {
-        /**
-         * I would recomend to run this process in a Worker
-         */
-        const formattedCode = prettier.format(activeCode.code, {
-          parser: 'babel',
-          plugins: [parserBabel],
+      if (Auth.currentAuthenticatedUser()) {
+        console.log(
+          'running prettier inside the Auth.currentAuthenticatedUser() guard'
+        )
+        const user = Auth.currentAuthenticatedUser()
+        user.then((user) => {
+          console.log('user is: ', user)
+
+          // put graphql mutation here
+          updateCode(user.username, activeCode.code)
         })
 
-        setPrettierCode(formattedCode)
-      } catch {}
+        try {
+          // try refactoring this process to run in a Worker
+          const formattedCode = prettier.format(activeCode.code, {
+            parser: 'babel',
+            plugins: [parserBabel],
+          })
+
+          setPrettierCode(formattedCode)
+        } catch {}
+      } else {
+        try {
+          // try refactoring this process to run in a Worker
+          const formattedCode = prettier.format(activeCode.code, {
+            parser: 'babel',
+            plugins: [parserBabel],
+          })
+
+          setPrettierCode(formattedCode)
+        } catch {}
+      }
     }
   }, [activeCode.code])
 
   useEffect(() => {
-    const debounce = setTimeout(runPrettier, 1000)
+    const debounce = setTimeout(runPrettier, 1500)
     return () => {
       clearInterval(debounce)
     }

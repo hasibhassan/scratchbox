@@ -1,27 +1,45 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import classNames from '@utils/classNames'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import IDE from '@sections/IDE'
 import Slideover from '@sections/Slideover'
+import Logo from '@ui/Logo'
+import { withAuthenticator, View, Image, useTheme } from '@aws-amplify/ui-react'
+import fetchCode from '@utils/fetchCode'
+import { useSandpack } from '@codesandbox/sandpack-react'
 
-export default function HomePage() {
-  const [open, setOpen] = useState(false)
+function HomePage({ signOut, user }) {
+  const { sandpack } = useSandpack()
+  const [savedUserCode, setSavedUserCode] = useState('')
+  // const [open, setOpen] = useState(false)
   const userNavigation = [
-    { name: 'Settings', href: '#', onClick: () => setOpen(!open) },
-    { name: 'Sign out', href: '#' },
+    // { name: 'Settings', onClick: () => setOpen(!open) },
+    { name: 'Sign Out', onClick: () => signOut() },
   ]
   const navigation = []
-  const user = {
-    name: 'User',
-    email: 'user@user.com',
-    imageUrl:
-      'https://avatars.dicebear.com/api/male/john.svg?background=%230000ff',
-  }
+
+  useEffect(() => {
+    let savedCode = fetchCode(user.username)
+    savedCode.then((data) => {
+      console.log('saveeuser code in useeffect 1', savedUserCode)
+      console.log('data in useeffect 1', data)
+
+      setSavedUserCode(data)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (savedUserCode && savedUserCode !== 'not found') {
+      console.log('savedusercode in useeffect2', savedUserCode)
+
+      sandpack.updateFile(sandpack.activePath, savedUserCode)
+    }
+  }, [savedUserCode])
 
   return (
     <>
-      <Slideover open={open} setOpen={setOpen} />
+      {/* <Slideover open={open} setOpen={setOpen} /> */}
       {/*
         update by using:
 
@@ -38,7 +56,7 @@ export default function HomePage() {
                 <div className="flex items-center justify-between h-5v">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <img className="h-8 w-8" src="" alt="Scratchbox" />
+                      <Logo />
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
@@ -69,7 +87,7 @@ export default function HomePage() {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              src={user.imageUrl}
+                              src={`https://avatars.dicebear.com/api/initials/${user.username}.svg?chars=1`}
                               alt=""
                             />
                           </Menu.Button>
@@ -88,10 +106,7 @@ export default function HomePage() {
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
                                   <a
-                                    href={item.href}
-                                    onClick={
-                                      item.onClick ? item.onClick : undefined
-                                    }
+                                    onClick={item.onClick}
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700'
@@ -148,16 +163,16 @@ export default function HomePage() {
                     <div className="flex-shrink-0">
                       <img
                         className="h-10 w-10 rounded-full"
-                        src={user.imageUrl}
+                        src={`https://avatars.dicebear.com/api/initials/${user.username}.svg?chars=1`}
                         alt=""
                       />
                     </div>
                     <div className="ml-3">
-                      <div className="text-base font-medium text-white">
+                      {/* <div className="text-base font-medium text-white">
                         {user.name}
-                      </div>
+                      </div> */}
                       <div className="text-sm font-medium text-gray-400">
-                        {user.email}
+                        {user.username}
                       </div>
                     </div>
                   </div>
@@ -166,7 +181,7 @@ export default function HomePage() {
                       <Disclosure.Button
                         key={item.name}
                         as="a"
-                        href={item.href}
+                        onClick={item.onClick}
                         className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
                       >
                         {item.name}
@@ -188,3 +203,20 @@ export default function HomePage() {
     </>
   )
 }
+
+export default withAuthenticator(HomePage, {
+  loginMechanisms: ['email'],
+  components: {
+    Header() {
+      const { tokens } = useTheme()
+
+      return (
+        <View textAlign="center" padding={tokens.space.large}>
+          <a href="/">
+            <Image alt="Scratchbox logo" src="logo-black.svg" />
+          </a>
+        </View>
+      )
+    },
+  },
+})
