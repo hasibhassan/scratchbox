@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import config from '../src/aws-exports'
