@@ -5,7 +5,7 @@ import defaultCode from '@utils/defaultCode'
 export default function updateCode(id, newCode) {
   async function autoSaveCode(id, code) {
     try {
-      let updateDetails = { id: id, code: code, '_version': 1 }
+      let updateDetails = { id, code }
       let result = await API.graphql(
         graphqlOperation(mutations.updateBox, { input: updateDetails })
       )

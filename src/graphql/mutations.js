@@ -11,9 +11,6 @@ export const createBox = /* GraphQL */ `
       code
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -27,9 +24,6 @@ export const updateBox = /* GraphQL */ `
       code
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -43,9 +37,6 @@ export const deleteBox = /* GraphQL */ `
       code
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;

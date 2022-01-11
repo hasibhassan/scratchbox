@@ -8,9 +8,6 @@ export const onCreateBox = /* GraphQL */ `
       code
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -21,9 +18,6 @@ export const onUpdateBox = /* GraphQL */ `
       code
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -34,9 +28,6 @@ export const onDeleteBox = /* GraphQL */ `
       code
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;

@@ -26,7 +26,6 @@ function HomePage({ signOut, user }) {
       console.log('saveeuser code in useeffect 1', savedUserCode)
       console.log('data in useeffect 1', data)
 
-      // @ts-ignore
       setSavedUserCode(data)
     })
   }, [])
@@ -183,10 +182,9 @@ function HomePage({ signOut, user }) {
                       <Disclosure.Button
                         key={item.name}
                         as="a"
-                        onClick={item.onClick}
                         className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
                       >
-                        {item.name}
+                        <a onClick={item.onClick}>{item.name}</a>
                       </Disclosure.Button>
                     ))}
                   </div>
