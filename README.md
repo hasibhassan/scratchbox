@@ -18,7 +18,7 @@
 
 Scratchbox is a full stack React app built with Next.js and written in TypeScript. The backend is hosted on AWS and built with AWS Amplify using AWS AppSync for the GraphQL API, AWS Lambda for the compute layer, and DynamoDB for the database.
 
-The project's aim is to let users experiment with React code in an online IDE which autosaves allowing users to use the IDE as a scratchpad that they can access from anywhere.
+This project's aim is to let users experiment with React code in an online IDE which autosaves allowing users to use the IDE as a scratchpad that they can access from anywhere.
 
 ## Technologies Used
 
